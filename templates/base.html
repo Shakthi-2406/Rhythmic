@@ -1,0 +1,43 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+
+
+
+    {% block css %}
+    {% endblock css%}
+
+    <script src="{% static 'functions.js' %}" defer></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+
+    <title>BLISSIC❤ | {% block title %}{% endblock title %}</title>
+</head>
+<body>
+
+    <div class="shakthi">
+        <a class="navbar-brand mr-4" href="{% url 'song-home'%}">BLISSIC❤</a>
+        <a class="nav-item nav-link" href="#">Home</a>
+        <a class="nav-item nav-link" href="{% url 'playlist-home'%}">Playlist</a>
+        <a class="nav-item nav-link" href="{% url 'favorites'%}">Favourites</a>
+        <a class="nav-item nav-link" href="#">Register</a>
+    </div>
+
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert-{{ message.tags }} alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock %}
+
+</body>
+</html>

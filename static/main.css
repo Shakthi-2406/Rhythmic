@@ -1,0 +1,41 @@
+/* body{ */
+    /* background-color: powderblue; */
+/* } */
+
+.add-new-song{
+    position:absolute;
+    z-index: 1;
+    right: 5%;
+    bottom: 5%;
+    width: auto;
+    height: auto;
+    font-size: 20px;
+    color: wheat;
+    background-color: rgb(14, 11, 11);
+    border-radius: 3px;
+    border: none;
+    padding: 0 20px;
+    /* padding: 30px; */
+}
+
+.shakthi a
+{
+    display: inline;
+}
+.hide-it
+{
+    display: none;
+}
+::-webkit-media-controls-enclosure {
+    border-radius: 50px;
+    background-color: rgb(237, 168, 240);
+}
+audio
+{
+    background-color: rgb(243, 236, 241);
+}
+a
+{
+    color: black;
+    text-decoration: none;
+}

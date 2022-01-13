@@ -1,0 +1,204 @@
+*{user-select: none;}
+body
+{
+    /* overflow: hidden; */
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8efef;
+}
+section
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background-color:black; */
+    /* background: linear-gradient(to bottom, #eecfea, #f1acdd); */
+    background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
+}
+.g-col
+{
+    position: absolute;
+    filter: blur(150px);
+}
+.g-col:nth-child(1)
+{
+    width: 600px;
+    height: 600px;
+    top: -300px;
+    /* left: 20px; */
+}
+.g-col:nth-child(2)
+{
+    width: 500px;
+    height: 500px;
+    bottom: -150px;
+    left: 100px;
+}
+.g-col:nth-child(3)
+{
+    width: 300px;
+    height: 300px;
+    bottom: 50px;
+    right: 100px;
+}
+.g-box
+{
+    position: relative;
+}
+.g-box .g-square
+{
+    position: absolute;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1) ;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    animation: animate 10s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+}
+.g-box .g-square:nth-child(1)
+{
+    top: -50px;
+    right: -60px;
+    width: 100px;
+    height: 100px;
+}
+.g-box .g-square:nth-child(2)
+{
+    top: 150px;
+    left: -100px;
+    width: 120px;
+    height: 120px;
+    z-index: 2;
+}
+.g-box .g-square:nth-child(3)
+{
+    bottom: 50px;
+    right: -60px;
+    width: 80px;
+    height: 80px;
+    z-index: 2;
+}
+.g-box .g-square:nth-child(4)
+{
+    bottom: -80px;
+    left: 100px;
+    width: 50px;
+    height: 50px;
+}
+.g-box .g-square:nth-child(5)
+{
+    top: -80px;
+    left: 140px;
+    width: 60px;
+    height: 60px;
+}
+.g-container
+{
+    position: relative;
+    width: 400px;
+    min-height: 400px;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1) ;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+}
+.g-form{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+}
+.g-form h2{
+    position: relative;
+    color: white;
+    font-size: 24px;
+    letter-spacing: 0.4px;
+    font-weight: 600 ;
+    margin-bottom: 40px;
+}
+.g-form h2::before
+{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background-color: white;
+}
+.g-form .g-input
+{
+    width: 100%;
+    margin-top: 20px;
+}
+.g-form .g-input input
+{
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 35px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05) ;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255,0.2);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: white;
+}
+.g-form .g-input input::placeholder
+{
+    color: white;
+}
+.g-form .g-input input[type="submit"]
+{
+    max-width: 100px;
+    background-color: white;
+    color: #666;
+    cursor: pointer;
+    /* margin-left: 100px; */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.g-forgot
+{
+    color: rgb(93, 93, 93);
+    margin-top: 5px;
+    font-size: 17px;
+}
+.g-forgot a
+{
+    color: rgb(172, 153, 172);
+    font-weight: 600;
+}
+.registerErrorMsg
+{
+    color: rgb(241, 60, 60);
+    list-style: none;
+    font-size: 0.88em;
+}
+
+@keyframes animate
+{
+    0%,100%{
+        transform: translateY(-40px);
+    }
+    50%{
+        transform: translateY(40px);
+    }
+}

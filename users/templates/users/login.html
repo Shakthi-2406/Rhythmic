@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'users/register.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<div class="content-section">
+
+<section>
+    <div class="g-col" style="background-color: #ff0884;"></div>
+    <div class="g-col" style="background-color: #fffc65;"></div>
+    <div class="g-col" style="background-color: #00e1ff;"> </div>
+    <div class="g-box">
+        <div class="g-square" style="--i:0;"></div>
+        <div class="g-square" style="--i:1;"></div>
+        <div class="g-square" style="--i:2;"></div>
+        <div class="g-square" style="--i:3;"></div>
+        <div class="g-square" style="--i:4;"></div>
+        <div class="g-container">
+            <div class="g-form">
+                <h2>Login Now</h2>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="g-input">
+                        <input type="text" name="username" placeholder="Username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username"><br></div>
+                    
+                    <div class="g-input">
+                        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required id="id_password"><br></div>
+
+                    {% if form.errors %}
+                    <br><div class="registerErrorMsg">🙁 Incorrect username or password (Both are case-sensitive)</div>
+                    {% endif %}
+                    <div class="g-input">
+                    <input type="submit" value="Get In"></div>
+
+                    {% comment %} <p class="g-forgot">Forgot password ? <a href="#">Click here</a></p> {% endcomment %}
+                    
+    
+                    <p class="g-forgot">Don't have an account ? <a href="{% url 'register' %}">Create now!</a></p> 
+                </form>
+            </div>
+        </div>
+        </div>
+    
+</section>
+</div>
+{% endblock content %}

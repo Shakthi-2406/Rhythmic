@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock css%}
+
+
+{% block scripts %}
+    <script src="{% static 'playlist/main.js' %}" defer> </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% endblock scripts %}
+
+{% block title %}
+{{ playlist.title }}
+{% endblock title %}
+
+{% block content %}
+
+
+<div id="spinner-box" class="text-center">
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow text-warning" role="status"></div>
+    <div class="spinner-grow text-info" role="status"></div>
+</div>
+
+<div id="baby" class="hide-it">
+    <h1>{{ playlist.title }}</h1>
+    <br>
+    {% for song in songs %}
+        <a href="{% url 'playlist-song-detail' pk=song.id pl=pl_id %}">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ song.title }} - {{song.genre}}</h5>
+                    <p class="card-text">{{ song.author }}</p>
+                    {% comment %} <audio id="song-audio-{{song.id}}" src="{{ song.file.url }}" hidden="true"></audio> {% endcomment %}
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+
+
+    <a href="{% url 'playlist-home' %}">BACK</a>
+    <br><br><br><br>
+    {% if owner %}
+        <a href="{% url 'songs-list-add-pl' pl=pl_id %}">ADD SONGS</a>   
+    {% endif %}
+</div> 
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'playlist/test.css' %}">
+{% endblock css%}
+
+
+{% block scripts %}
+    <script src="{% static 'playlist/main.js' %}" defer> </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% endblock scripts %}
+
+{% block title %}
+{{ playlist.title }}
+{% endblock title %}
+
+{% block content %}
+
+
+<div id="spinner-box" class="text-center">
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow text-warning" role="status"></div>
+    <div class="spinner-grow text-info" role="status"></div>
+</div>
+
+<div id="baby" class="hide-it">
+    <h1>ADD TO {{ playlist.title }}</h1>
+    <br>
+    {% for song in songs %}
+        <div class="card mb-2">
+            <a href="{% url 'song-detail' pk=song.id %}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ song.title }} </h5>
+                    <!-- <p class="card-text">{{ song.author }}</p> -->
+                </div>
+            </a>
+            <div class="card-body">
+
+                <form method="POST" class="add-remove-song-forms" data-form-id="{{ song.id }}">
+                    {% csrf_token %}
+                    <button id="add-remove-song-btn-{{ song.id }}">
+                        {% if song.add_in_pl %}
+                            Remove
+                        {% else %}
+                            Add
+                        {% endif %}
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    {% endfor %}
+
+    {% comment %} <a href="{% url 'playlist-songs' pk=pl_id %}">BACK</a> {% endcomment %}
+    <br><br><br><br>
+    
+    <form method="POST" class="final-add-songs-pl-forms" data-form-id="{{ pl_id }}">
+        {% csrf_token %}
+        <a href="{% url 'playlist-songs' pk=pl_id %}"><button id="final-add-songs-pl-btn-{{ pl_id }}">
+            DONE
+    </button></a>
+
+    </form> 
+</div> 
+
+
+
+{% endblock content %}

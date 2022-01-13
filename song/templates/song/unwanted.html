@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'song/main.css' %}">
+{% endblock css%}
+
+
+{% block scripts %}
+    <script src="{% static 'song/main.js' %}" defer> </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% endblock scripts %}
+
+{% block title %}
+{{ playlist.title }}
+{% endblock title %}
+
+{% block content %}
+
+
+<div id="spinner-box" class="text-center">
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow text-warning" role="status"></div>
+    <div class="spinner-grow text-info" role="status"></div>
+</div>
+
+<div id="baby" class="hide-it">
+                <h1 class="card-title">{{ song.title }} - {{song.genre}}</h1>
+                {% comment %} <p class="card-text">{{ song.author }}</p> {% endcomment %}
+
+
+                <form method="POST" class="like-unlike-forms" data-form-id="{{ song.id }}">
+                    {% csrf_token %}
+                    <button id="like-unlike-btn-{{ song.id }}">
+                        {% if liked %}
+                            Remove from fav
+                        {% else %}
+                            Add to fav
+                        {% endif %}
+                    </button>
+                </form>
+
+                <p id="liked-count">added by {{ song.liked_count }}</p>
+
+
+                <audio id="song-audio" src="{{ song.file.url }}" loop></audio>
+                <a href="{% url 'playlist-song-detail' pk=previous_id pl=pl %}">Back</a>
+                <button class="" id="play-btn">Play</button>
+                <button class="hide-it" id="pause-btn">Pause</button>
+                <a href="{% url 'playlist-song-detail' pk=next_id pl=pl %}">Next</a>
+
+                <div class="progressbar_container" id="progress_container">
+                    <div class="progress_duration_meter">
+                        <div id="current_time">
+                            00:00
+                        </div>
+                        <div id="duration">{{ song.duration }}</div>
+                        <div class="progress_div" id="progress_div">
+                            <div class="progress" style="animation-duration:{{ song.duration }}s;" id="progress"></div>
+                        </div>
+                    </div>
+                </div>
+    <a href="{% url 'playlist-songs' pk=pl %}">BACK</a>
+        
+</div> 
+
+{% endblock content %}

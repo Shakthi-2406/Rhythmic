@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'song/main.css' %}">
+{% endblock css%}
+
+
+{% block scripts %}
+    <script src="{% static 'song/main.js' %}" defer> </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% endblock scripts %}
+
+{% block title %}
+    {% if play %}{{ playlist.title }}
+    {% elif fav %}FAVOURITES
+    {% else %}
+    BLISS
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
+
+
+<div id="spinner-box" class="text-center">
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow text-warning" role="status"></div>
+    <div class="spinner-grow text-info" role="status"></div>
+</div>
+
+<div id="baby" class="hide-it">
+
+                <!-- <img src="{{ song.cover.url }}" alt=""> -->
+                <!-- CHANGE HERE PLS DONT FORGET -->
+
+                <img class="animate-it" src="{{ song.cover.url }}" alt="">
+
+                <br><br>
+                <h2 class="card-title">{{ song.title }}</h2>
+                <h5>{{song.genre}}</h5>
+                <a href="{% url 'show-profile' upk=song.author.user.id %}"><h6>{{song.author.user.username}}</h6></a>
+                <br>
+                <!-- <p class="card-text">{{ song.author }}</p>  -->
+                
+
+                <audio class="audio-pls" id="song-audio" src="{{ song.file.url }}" autoplay></audio>
+
+                {% comment %} <h2>{{ song.duration }}</h2> {% endcomment %}
+
+                <div class="progressbar_container" id="progress_container">
+                    <div class="progress_duration_meter">
+                        <div id="current_time">
+                            0:00
+                        </div>
+                        <div id="duration">{{ song.duration }}</div>
+                        <div class="progress_div" id="progress_div">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="song-controls">
+                    <form method="POST" class="like-unlike-forms" data-form-id="{{ song.id }}">
+                        {% csrf_token %}
+                        <button id="like-unlike-btn-{{ song.id }}">
+                            {% if liked %}
+                                Dislike
+                            {% else %}
+                                Like
+                            {% endif %}
+                        </button>
+                    </form>
+                    <!-- main.js 161 -->
+                    <a class="prev-song-playing" href="
+                    {% if fav %}
+                        {% url 'fav_song_detail' pk=previous_id %}
+                    {% elif play %}
+                        {% url 'playlist-song-detail' pk=previous_id pl=pl %}
+                    {% else %}
+                        {% url 'song-detail' pk=previous_id %}
+                    {% endif %}"><<</a>
+                    <button class="hide-it" id="play-btn">Play</button>
+                    <button class="" id="pause-btn">Pause</button>
+                    <a class="next-song-playing" 
+                    {% if fav %}
+                        href="{% url 'fav_song_detail' pk=next_id %}" id="abc{{next_id}}"
+                    {% elif play %}
+                        href="{% url 'playlist-song-detail' pk=next_id pl=pl %}" id="abc{{pl}}{{next_id}}"
+                    {% else %}
+                        href="{% url 'song-detail' pk=next_id %}" id="abc{{next_id}}"
+                    {% endif %}>>></a>
+                    <button id="auto-loop-btn">Loop</button>
+                </div>
+                <p id="liked-count">{{ song.liked_count }}</p>
+
+                
+                <div id="quick-short-msg" class="hide-it"> </div>
+                
+
+
+                <br><br>
+                {% if play %}
+                    <a class="back-page-link"href="{% url 'playlist-songs' pk=pl %}">BACK</a>
+                {% else %}
+                    <a class="back-page-link"href="{% url 'song-home'%}" >HOME</a>
+                {% endif %}
+
+
+
+
+
+            </div> 
+
+
+
+
+{% endblock content %}
