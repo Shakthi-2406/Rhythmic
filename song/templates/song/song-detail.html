@@ -109,8 +109,9 @@
                 {% endif %}
 
 
-
-
+                {% if song.author.user == request.user %}
+                    <a href="{% url 'edit-song' pk=song.id %}">EDIT</a>
+                {% endif %}
 
             </div> 
 

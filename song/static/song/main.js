@@ -59,16 +59,6 @@ autoLoopBtn.addEventListener("click",()=>{
 })
 
 
-// GETTING DATA OF NEXT LINK
-if (NextSongDataClass){
-    const xxx = NextSongDataClass.id
-    NextSongLinkId = xxx.charAt(xxx.length -1)
-    NextPLId = xxx.charAt(xxx.length -2)
-    console.log(NextSongLinkId)
-    console.log(NextPLId)
-}
-
-
 // PLAY AND PAUSE BUTTON
 playBtn.addEventListener("click",()=>{
     songAudio.play()
@@ -112,19 +102,15 @@ progressDiv.addEventListener('click', (e)=>{
 
 
 // PLAYING NEXT SONG IF NOT AUTOLOOP
-if(!autoLoop)
-{
-    music.addEventListener('ended', ()=>{
-        console.log("But whyyyyyy")
-        if(isNaN(NextPLId) && NextSongLinkId!=0){
-            window.location.replace('/songs/detail/'+NextSongLinkId+'/')
-        }
-        else if(NextSongLinkId!=0){
-            window.location.replace('/songs/detail/'+NextSongLinkId+'/'+NextPLId+'/')
-            console.log("success")
-        }
-    })
-}
+music.addEventListener('ended', ()=>{
+    if(!autoLoop)
+    {
+        x = NextSongDataClass.href
+        console.log(x)
+        window.location.replace(x)
+    }
+})
+
 
 
 // TOTAL DURATION 

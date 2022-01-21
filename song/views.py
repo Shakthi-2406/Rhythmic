@@ -28,6 +28,22 @@ def new_song_form(request):
 
     return render(request, 'song/newsong.html', {'form':form})
 
+def edit_song_form(request,*args, **kwargs):
+    song_id = kwargs['pk']
+    song = Song.objects.filter(id=song_id).first()
+    if request.method == 'POST':
+        form = SongForm(request.POST,request.FILES, instance=song)
+
+        if form.is_valid():
+            song = form.save(commit=False)
+            song.save()
+            # RETURNING TO HOME PAGE
+            return HttpResponseRedirect('/')
+    else:
+        form = SongForm(instance=song)
+
+    return render(request, 'song/newsong.html', {'form':form})
+
 
 @receiver(pre_save, sender=Song)
 def song_save_calculate_duration(sender, instance, raw, using, update_fields, **kwargs):

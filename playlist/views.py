@@ -14,8 +14,9 @@ def playlist_songs(request, **kwargs):
     current = Playlist.objects.filter(id=pl_id).first()
     songs = []
     owner = False
-    if request.user.profile == current.author:
-        owner = True
+    if request.user.is_authenticated:
+        if request.user.profile == current.author:
+            owner = True
     all_songs = Song.objects.all()
     for song in all_songs:
         if song in current.parts.all():

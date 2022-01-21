@@ -3,6 +3,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 {% endblock css%}
 
 
@@ -32,7 +33,7 @@
 <div id="baby" class="hide-it">
     <a href="{% url 'new_song_form' %}"><button class="add-new-song">ADD A SONG</button></a>
     {% for song in songs %}
-        <a href="
+        <a style="text-decoration: none;" href="
         {% if fav %}
             {% url 'fav_song_detail' pk=song.id %}
         {% else %}

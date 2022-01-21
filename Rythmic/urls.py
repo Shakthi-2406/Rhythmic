@@ -34,6 +34,7 @@ urlpatterns = [
     path('', song_view.home , name="song-home"),
     path('favorites/', song_view.favorites , name="favorites"),
     path('new/', song_view.new_song_form , name="new_song_form"),
+    path('edit/<int:pk>/', song_view.edit_song_form , name="edit-song"),
     
     path('accounts/profile/', song_view.home , name="song-home"),
     path('register/', users_view.register , name="register"),
