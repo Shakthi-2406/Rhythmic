@@ -3,7 +3,6 @@ A personalized music app where user can upload songs, buffer to a specific time 
 </br>UI is yet to be improved
 </br>
 <h3>Functionalites added:<h3>
-<ul>
 <li>User Login</li>
 <li>User Registration</li>
 <li>User uploading songs with cover</li>
@@ -11,7 +10,6 @@ A personalized music app where user can upload songs, buffer to a specific time 
 <li>Songs can be liked (Done using ajax)</li>
 <li>Playlist can be created</li>
 <li>Playlist can be edited by adding or removing songs</li>
-<ul>
 </br>
 </br>
 
